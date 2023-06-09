@@ -18,22 +18,24 @@ router.get (`/`, (req, res) => {
 });
 
 router.post('/', (req,res) => {
-    console.log(req.body);
-    const{title, description, price, imagen, code, stock}= req.body;
-    const result = productos.agregarProducto(title, description, price, imagen, code, stock);
+    const{title, description, code, price, status, stock, imagen}= req.body;
+    const result = productos.agregarProducto(title, description, code, price, status, stock, imagen);
    
     return res.json({result});
 
 });
 
-router.put('/', (req,res) => {
-    return res.json({msg: `PUT Product`});
+router.put('/:id', (req,res) => {
+    const {id} = req.params;
+    const result = productos.updateProduct(parseInt(id), req.body);
+    return res.json({result});
 
 });
 
-router.delete('/', (req,res) => {
+router.delete('/:id', (req,res) => {
     const {id} = req.params;
-    return res.json({msg: `DELETE Product`});
+    const result = productos.deleteProduct(parseInt(id));
+    return res.json({result});
 
 });
 

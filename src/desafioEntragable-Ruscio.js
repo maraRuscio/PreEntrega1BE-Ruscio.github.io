@@ -26,7 +26,7 @@ class ProductManager {
       }
     
     
-    agregarProducto(title, description, price, imagen, code, stock) {
+    agregarProducto(title, description, code, price, status = true, stock, imagen) {
       try {
         const existecode = this.products.find((e) =>{
           return e.code === code;
@@ -34,10 +34,10 @@ class ProductManager {
         if(existecode) {
           console.log(`El codigo ${code} ya se encuentra en el arreglo`);
         }else{
-          if (title && description && price && imagen && code&& stock){
+          if (title && description && code &&price && stock && imagen ){
                   
         // crear el producto
-        const producto = { id: ++ProductManager.id, title, description, price, imagen, code, stock};
+        const producto = { id: ++ProductManager.id, title, description, code, price, status : true, stock, imagen};
         this.products.push(producto);
         writeFileSync(this.path, JSON.stringify(this.products));
         }else{
@@ -49,7 +49,7 @@ class ProductManager {
     }
 
     getProductById (idProduct){
-        const existproducto = this.products.find((e) => e.id === idProduct)
+        const existproducto = this.products.find((e) => e.id == idProduct)
         if(existproducto){
             return existproducto;
         }else {
@@ -61,7 +61,7 @@ class ProductManager {
     deleteProduct (idProduct){
      try {
       let men;
-      const ind = this.products.findIndex(e => e.id === idProduct)
+      const ind = this.products.findIndex(e => e.id == idProduct)
         if(ind < 0)
           men = `el producto con ID ${idProduct}no existe`;
         else{
@@ -79,7 +79,7 @@ class ProductManager {
     updateProduct (idProduct, propiedad){
       try {
         let men;
-      const ind = this.products.findIndex( e => e.id === idProduct);
+      const ind = this.products.findIndex( e => e.id == idProduct);
       if(ind > -1){
         const {id, ...rest} = propiedad;
         this.products[ind] = {...this.products[ind], ...rest};

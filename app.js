@@ -1,6 +1,6 @@
 import express from 'express';
-import products from '../router/products.js';
-import carts from '../router/carts.js';
+import products from './routers/products.js';
+import carts from './routers/carts.js';
 
 
 const app = express();

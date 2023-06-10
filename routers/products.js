@@ -1,7 +1,7 @@
 import { Router } from "express";
-import ProductManager from '../src/desafioEntragable-Ruscio.js';
+import ProductManager from '../models/ProductManager.js';
 
-const productos = new ProductManager(`./data/productos.json`);
+const productos = new ProductManager('./data/productos.json');
 const router = Router();
 
 
@@ -22,7 +22,6 @@ router.post('/', (req,res) => {
     const result = productos.agregarProducto(title, description, code, price, status, stock, imagen);
    
     return res.json({result});
-
 });
 
 router.put('/:id', (req,res) => {

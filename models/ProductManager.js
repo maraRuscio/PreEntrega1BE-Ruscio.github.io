@@ -1,5 +1,5 @@
-
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
+
 class ProductManager {
   static id;
 
@@ -49,12 +49,11 @@ class ProductManager {
     }
 
     getProductById (idProduct){
-        const existproducto = this.products.find((e) => e.id == idProduct)
+        const existproducto = this.products.find((e) => e.id === idProduct)
         if(existproducto){
             return existproducto;
         }else {
-          let mensaje = `El producto con el ID: ${idProduct} no existe`;
-          return mensaje;
+          return false;
         }
     }
 
@@ -97,6 +96,3 @@ class ProductManager {
 }
 
 export default ProductManager;
-/* module.exports = {
-  ProductManager,
-} */

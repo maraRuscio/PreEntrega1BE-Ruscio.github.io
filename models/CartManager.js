@@ -85,68 +85,29 @@ class CartManager {
         
     };
 
+    removeCart(idCart){
+      try {
+        let men;
+        const ind = this.carts.findIndex(e => e.id == idCart)
+          if(ind < 0)
+            men = `el carrito con ID ${idCart}no existe`;
+          else{
+            this.carts.splice(ind, 1);
+            writeFileSync(this.path, JSON.stringify(this.carts));
+            men = `el carrito con ID ${idCart} fue eliminado`
+          }
+          return men;
+       } catch (error) {
+        console.log(error);
+        
+       }
+
+    };
+
+
     };
   
    
-/*
-    agregarProducto(title, description, code, price, status = true, stock, imagen) {
-      try {
-        const existecode = this.products.find((e) =>{
-          return e.code === code;
-        });
-        if(existecode) {
-          console.log(`El codigo ${code} ya se encuentra en el arreglo`);
-        }else{
-          if (title && description && code &&price && stock && imagen ){
-                  
-        // crear el producto
-        const producto = { id: ++ProductManager.id, title, description, code, price, status : true, stock, imagen};
-        this.products.push(producto);
-        writeFileSync(this.path, JSON.stringify(this.products));
-        }else{
-          console.log(`no se cuentan con todos los parametros para crear el producto`)
-        }}
-      }catch(e){
-      console.log(`${e} no se pudo escribir el archivo`);
-      }
-    }
-
-    deleteProduct (idProduct){
-     try {
-      let men;
-      const ind = this.products.findIndex(e => e.id == idProduct)
-        if(ind < 0)
-          men = `el producto con ID ${idProduct}no existe`;
-        else{
-          this.products.splice(ind, 1);
-          writeFileSync(this.path, JSON.stringify(this.products));
-          men = `el producto con ID ${idProduct} fue eliminado`
-        }
-        return men;
-     } catch (error) {
-      console.log(error);
-      
-     }
-      }
-
-    updateProduct (idProduct, propiedad){
-      try {
-        let men;
-      const ind = this.products.findIndex( e => e.id == idProduct);
-      if(ind > -1){
-        const {id, ...rest} = propiedad;
-        this.products[ind] = {...this.products[ind], ...rest};
-        writeFileSync(this.path, JSON.stringify(this.products));
-        men= `el producto con ID ${idProduct} fue modificado exitosamente`;
-    }else
-      men = `el producto con ID ${idProduct} no existe`;
-   console.log(men);
-      } catch (error) {
-        console.log(error);
-        
-      }
-}
- */
 
 
 export default CartManager;

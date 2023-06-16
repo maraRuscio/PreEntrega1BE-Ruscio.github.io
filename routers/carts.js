@@ -24,5 +24,11 @@ router.post('/:id/product/:pid', (req,res) => {
 
 });
 
+router.delete('/:id',(req,rs)=>{
+    const id = req.params;
+    const result = carts.removeCart(id);
+    return res.json({result});
+});
+
 
 export default router;
